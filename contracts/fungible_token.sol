@@ -8,7 +8,7 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 contract fungible_token is ERC20 {
     address public admin;
 
-    constructor() ERC20("XXXXX", "XXX") {
+    constructor() ERC20("MetaMark", "MetaMark") {
         _mint(msg.sender, 10000*10**18);
         admin = msg.sender;
     }
