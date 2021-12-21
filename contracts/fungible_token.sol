@@ -15,7 +15,7 @@ contract fungible_token is ERC20, ERC20Detailed {
     }
 
     modifier onlyOwner {
-        require(msg.sender == admin);
+        require(msg.sender == admin, "You do not have access to this function.");
         _;
     }
 
@@ -30,5 +30,9 @@ contract fungible_token is ERC20, ERC20Detailed {
         _burn(msg.sender, amount);
     }
 
-    
+    //transfer token to users with correct answer
+    function _transfer() internal {
+        //check if answer is correct
+        super._transfer(admin, msg.sender, 1);
+    }
 }
