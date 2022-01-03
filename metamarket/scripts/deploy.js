@@ -14,11 +14,23 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
+  // fungible_token.sol
+  const [deployer] = await ethers.getSigners();
+  console.log("Deploying contracts with the account:", deployer.address);
+  const Amount = (await deployer.getBalance()).toString();
+  console.log("Account balance:", (await ethers.utils.formatEther(Amount)));
+
+  const Token = await ethers.getContractFactory("fungible_token");
+  const token = await Token.deploy();
+  console.log("Token address:", token.address);
+
+  // NFT_market.sol
   const NFTMarket = await hre.ethers.getContractFactory("NFTMarket");
   const nftMarket = await NFTMarket.deploy();
-  await nftMarket.deployed();
+  await nftMarket.deployed(token.address);
   console.log("NFT_market deployed to:", nftMarket.address);
 
+  // NFT.sol
   const NFT = await hre.ethers.getContractFactory("NFT");
   const nft = await NFT.deploy(nftMarket.address);
   await nft.deployed();

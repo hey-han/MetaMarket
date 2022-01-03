@@ -4,8 +4,7 @@ pragma solidity >=0.7.0 <0.9.0;
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-
-// import "hardhat/console.sol";
+import "hardhat/console.sol";
 
 contract NFT is ERC721URIStorage {
     using Counters for Counters.Counter;
