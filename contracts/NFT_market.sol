@@ -1,14 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0 <0.9.0;
 
-import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "../metamarket/node_modules/@openzeppelin/contracts/utils/Counters.sol";
+import "../metamarket/node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "../metamarket/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "../metamarket/node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-import "hardhat/console.sol";
+
+// import "hardhat/console.sol";
 
 contract NFTMarket is ReentrancyGuard {
   using Counters for Counters.Counter;
+  using SafeMath for uint256;
   Counters.Counter private _itemIds;
   Counters.Counter private _itemsSold;
 
@@ -52,7 +55,7 @@ contract NFTMarket is ReentrancyGuard {
     uint256 tokenId,
     uint256 price
   ) public payable nonReentrant {
-    require(price > 0, "Price must be at least 1 wei");
+    // require(price > 0, "Price must be above 0");
     require(msg.value == listingPrice, "Price must be equal to listing price");
 
     _itemIds.increment();
