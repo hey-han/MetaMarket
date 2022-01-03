@@ -20,7 +20,8 @@ module.exports = {
     },
     mumbai: {
       url: 'https://polygon-mumbai.infura.io/v3/83106b60c2b746a38eda42bce25a2980',
-      accounts: [privateKey]
+      accounts: [privateKey],
+      gasPrice: 8000000000,
     },
   },
   solidity: {

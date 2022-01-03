@@ -25,7 +25,7 @@ async function main() {
   console.log("Token address:", token.address);
 
   // NFT_market.sol
-  const NFTMarket = await hre.ethers.getContractFactory("NFTMarket");
+  const NFTMarket = await hre.ethers.getContractFactory("MetaMarket");
   const nftMarket = await NFTMarket.deploy();
   await nftMarket.deployed(token.address);
   console.log("NFT_market deployed to:", nftMarket.address);
