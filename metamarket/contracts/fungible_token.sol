@@ -3,8 +3,8 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
-import "../metamarket/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "../metamarket/node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 contract fungible_token is ERC20, Ownable {
 
