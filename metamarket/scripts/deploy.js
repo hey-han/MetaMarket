@@ -14,13 +14,8 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const FungibleToken = await hre.ethers.getContractFactory("fungible_token");
-  const fungibleToken = await FungibleToken.deploy();
-  await fungibleToken.deployed();
-  console.log("fungible_token deployed to:", fungibleToken.address);
-
-  const NFTMarket = await hre.ethers.getContractFactory("NFT_market");
-  const nftMarket = await NFTMarket.deploy(fungibleToken.address);
+  const NFTMarket = await hre.ethers.getContractFactory("NFTMarket");
+  const nftMarket = await NFTMarket.deploy();
   await nftMarket.deployed();
   console.log("NFT_market deployed to:", nftMarket.address);
 

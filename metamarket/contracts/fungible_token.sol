@@ -3,12 +3,12 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
-import "../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract fungible_token is ERC20, Ownable {
 
-    constructor() ERC20("MetaMark", "MetaMark") Ownable() {
+    constructor() ERC20("MetaMark", "MetaMark") {
         _mint(msg.sender, 10000*(10**18));
     }
 
