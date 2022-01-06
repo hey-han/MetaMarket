@@ -13,7 +13,6 @@ contract fungible_token is ERC20, Ownable {
 
     // do not want a fixed supply
     function mint(address to, uint amount) external onlyOwner {
-        to = msg.sender;
         _mint(to, amount);
     }
 
