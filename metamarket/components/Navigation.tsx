@@ -181,6 +181,24 @@ export default function Navigation() {
             <b>Create</b>
           </Button>
         </Link>
+
+        <Link href='/quiz'>
+          <Button
+            style={style.navBtn}
+            color='inherit'
+            sx={{
+              textTransform: 'none',
+              '&:hover': {
+                background: 'white',
+                color: 'black',
+              },
+            }}
+            // onClick={() => handleOnClick('/explore')}
+          >
+            <b>Quiz</b>
+          </Button>
+        </Link>
+
         {currentUser ? (
           <div style={style.loginBtn}>
             <Link href='/dashboard'>
