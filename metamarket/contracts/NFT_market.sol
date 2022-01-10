@@ -48,11 +48,7 @@ contract MetaMarket is ReentrancyGuard {
   }
 
   /* Places an item for sale on the marketplace */
-  function createMarketItem(
-    address nftContract,
-    uint256 tokenId,
-    uint256 price
-  ) public payable nonReentrant {
+  function createMarketItem(address nftContract, uint256 tokenId, uint256 price) public payable nonReentrant {
     // require(price > 0, "Price must be above 0");
     require(msg.value == listingPrice, "Price must be equal to listing price");
 
@@ -84,10 +80,7 @@ contract MetaMarket is ReentrancyGuard {
 
   /* Creates the sale of a marketplace item */
   /* Transfers ownership of the item, as well as funds between parties */
-  function createMarketSale(
-    address nftContract,
-    uint256 itemId
-    ) public payable nonReentrant {
+  function createMarketSale(address nftContract, uint256 itemId) public payable nonReentrant {
     uint price = idToMarketItem[itemId].price;
     uint tokenId = idToMarketItem[itemId].tokenId;
     require(msg.value == price, "Please submit the asking price in order to complete the purchase");

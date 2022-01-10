@@ -38,6 +38,10 @@
     "react-modal": "^3.14.4",
     "styled-components": "^5.3.3",
     "tailwindcss": "^3.0.1",
+<<<<<<< HEAD
+=======
+    "web3": "^1.6.1",
+>>>>>>> f3f6c1991eb4cd4475485f27925ce6afbd127dcc
     "web3modal": "^1.9.4",
     "yup": "^0.32.11"
   },
