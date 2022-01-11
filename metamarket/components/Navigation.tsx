@@ -80,7 +80,8 @@ export default function Navigation() {
               },
             }}
           >
-            LOGO
+            <img src="/MetaMarket.ico" alt="website logo" height ="50" width="50"/>
+            <b>&nbsp;MetaMarket</b>
           </Button>
         </Link>
         {/* <Link href='/'>
@@ -154,7 +155,7 @@ export default function Navigation() {
                     <MenuItem>About</MenuItem>
                   </Link>
                   <Link href='/contributors'>
-                    <MenuItem>Contributors</MenuItem>
+                    <MenuItem>Our Team</MenuItem>
                   </Link>
                 </React.Fragment>
               }
@@ -165,6 +166,7 @@ export default function Navigation() {
             </Tooltip>
           </Button>
         </Link>
+
         <Link href='/create'>
           <Button
             style={style.navBtn}
@@ -182,7 +184,7 @@ export default function Navigation() {
           </Button>
         </Link>
 
-        <Link href='/quiz'>
+        <Link href='/earn-tokens'>
           <Button
             style={style.navBtn}
             color='inherit'
@@ -195,7 +197,7 @@ export default function Navigation() {
             }}
             // onClick={() => handleOnClick('/explore')}
           >
-            <b>Quiz</b>
+            <b>Earn Tokens</b>
           </Button>
         </Link>
 
