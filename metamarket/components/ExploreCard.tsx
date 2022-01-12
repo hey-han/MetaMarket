@@ -7,19 +7,19 @@ import { red } from "@mui/material/colors";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import data from "../data.json";
 
 interface ExploreCardProps {
   id: string;
   nftName: string;
   creatorName: string;
   sellerName: string;
+  price: string;
   image: string;
 }
 
 export default function ExploreCard(props: ExploreCardProps) {
   return (
-    <Link href={"/explore/" + props.uid} passHref>
+    <Link href={"/explore/" + props.id} passHref>
       <Card>
         <CardActionArea
           sx={{
@@ -42,8 +42,9 @@ export default function ExploreCard(props: ExploreCardProps) {
               component="div"
               sx={{ textAlign: "center" }}
             >
-              {props.creatorName}
+              {props.nftName}
             </Typography>
+
             <Typography
               variant="body1"
               color="text.secondary"
@@ -54,33 +55,21 @@ export default function ExploreCard(props: ExploreCardProps) {
                 marginBottom: "20px",
               }}
             >
-              {props.description}
+              {props.price} MetaMark
             </Typography>
+
+            <Typography
+              gutterBottom
+              variant="button"
+              component="div"
+              sx={{ textAlign: "center" }}
+            >
+              buy
+            </Typography>
+
           </CardContent>
         </CardActionArea>
       </Card>
     </Link>
   );
 }
-
-
-
-<Box sx={{ flexGrow: 1 }}>
-<Grid
-  container
-  spacing={{ xs: 2, md: 3 }}
-  columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }}
->
-  {nfts.map((nft, i) => (
-    <Grid item xs={1} sm={1} md={1} lg={1} xl={1} key={i}>
-      <ExploreCard
-        id={nft.tokenId}
-        nftName={nft.name}
-        creatorName={nft.owner}
-        sellerName={nft.seller}
-        image={nft.image}
-      />
-    </Grid>
-  ))}
-</Grid>
-</Box>
