@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>MetaMarket</title>
         <link rel="icon" href="/MetaMarket.ico" />
+        <link rel="shortcut icon" href="/MetaMark.icog" />
       </Head>
       <Navigation />
       <Component {...pageProps} />

@@ -10,11 +10,11 @@ import Link from "next/link";
 import data from "../data.json";
 
 interface ExploreCardProps {
-  uid: string;
-  imageURL: string;
+  id: string;
+  nftName: string;
   creatorName: string;
-  creatorAvatarURL: string;
-  description: string;
+  sellerName: string;
+  image: string;
 }
 
 export default function ExploreCard(props: ExploreCardProps) {
@@ -31,21 +31,10 @@ export default function ExploreCard(props: ExploreCardProps) {
           <CardMedia
             component="img"
             height="170"
-            image={props.imageURL}
+            image={props.image}
             alt="green iguana"
           />
-          <Avatar
-            src={props.creatorAvatarURL}
-            sx={{
-              bgcolor: red[500],
-              marginTop: "-30px",
-              width: "70px",
-              height: "70px",
-              border: "5px solid white",
-            }}
-          >
-            S
-          </Avatar>
+          
           <CardContent>
             <Typography
               gutterBottom
@@ -73,3 +62,25 @@ export default function ExploreCard(props: ExploreCardProps) {
     </Link>
   );
 }
+
+
+
+<Box sx={{ flexGrow: 1 }}>
+<Grid
+  container
+  spacing={{ xs: 2, md: 3 }}
+  columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }}
+>
+  {nfts.map((nft, i) => (
+    <Grid item xs={1} sm={1} md={1} lg={1} xl={1} key={i}>
+      <ExploreCard
+        id={nft.tokenId}
+        nftName={nft.name}
+        creatorName={nft.owner}
+        sellerName={nft.seller}
+        image={nft.image}
+      />
+    </Grid>
+  ))}
+</Grid>
+</Box>
