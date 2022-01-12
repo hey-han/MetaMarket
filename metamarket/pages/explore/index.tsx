@@ -29,6 +29,10 @@ const Explore: NextPage = () => {
   }, [])
 
   async function loadNFTs() {
+
+
+
+ 
     /* create a generic provider and query for unsold market items */
     const provider = new ethers.providers.JsonRpcProvider("https://matic-mumbai.chainstacklabs.com")
     const nftContract = new ethers.Contract(nftaddress, NFT.abi, provider)
@@ -39,7 +43,7 @@ const Explore: NextPage = () => {
     *  map over items returned from smart contract and format 
     *  them as well as fetch their token metadata
     */
-    const items = await Promise.all(data.map(async i => {
+    const items = await Promise.all(data.map(async (i: any) => {
       const tokenUri = await nftContract.tokenURI(i.tokenId)
       const meta = await axios.get(tokenUri)
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
@@ -54,11 +58,11 @@ const Explore: NextPage = () => {
       }
       return item
     }))
-    setNfts(items)
+    setNfts(items as any)
     setLoadingState('loaded') 
   }
 
-  async function buyNft(nft) {
+  async function buyNft(nft: any) {
     /* needs the user to sign the transaction, so will use Web3Provider and sign it */
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
@@ -90,7 +94,7 @@ const Explore: NextPage = () => {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }}
       >
-        {nfts.map((nft, i) => (
+        {nfts.map((nft:any, i) => (
           <Grid item xs={1} sm={1} md={1} lg={1} xl={1} key={i}>
             <ExploreCard
               id={nft.tokenId}
@@ -103,14 +107,14 @@ const Explore: NextPage = () => {
           </Grid>
         ))}
       </Grid>
-      <button className="w-full bg-sky-400 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
+      {/* <button className="w-full bg-sky-400 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button> */}
       </Box>
 
       <div className="flex justify-center">
         <div className="px-4" style={{ maxWidth: '1600px' }}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
             {
-              nfts.map((nft, i) => (
+              nfts.map((nft: any, i) => (
                 <div key={i} className="border shadow rounded-xl overflow-hidden">
                   <img src={nft.image} />
                   <div className="p-4">

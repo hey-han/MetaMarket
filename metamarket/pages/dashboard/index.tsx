@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Card,
   CardHeader,
@@ -15,6 +15,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { width } from "@mui/system";
 import FadeIn from "react-fade-in";
 import { WithLogin } from "../../components/AuthModal";
+import { AuthContext } from "../../context/AuthContext";
 
 const Profile = () => {
   const [openEmail, setOpenEmail] = React.useState(false);
@@ -24,6 +25,9 @@ const Profile = () => {
   const [openPassword, setOpenPassword] = React.useState(false);
   const handleOpenPassword = () => setOpenPassword(true);
   const handleClosePassword = () => setOpenPassword(false);
+
+  const { user } = useContext(AuthContext);
+
   return (
     <FadeIn>
       <div
@@ -53,7 +57,7 @@ const Profile = () => {
                 variant="body2"
                 style={{ fontSize: 20, textAlign: "center" }}
               >
-                <b>John Tan 12345</b>
+                <b>{user?.username}</b>
               </Typography>
               <Typography style={{ textAlign: "center" }}>5 assets</Typography>
               <Typography style={{ textAlign: "center" }}>
@@ -108,13 +112,13 @@ const Profile = () => {
               <div></div>
 
               <Typography>
-                <b>Username</b>: JohnTan12345
+                <b>Username</b>: {user?.username}
               </Typography>
               <Typography>
-                <b>Id</b>: ABC123456
+                <b>Id</b>: {user?.id}
               </Typography>
               <Typography>
-                <b>Email</b>: sampleEmail@gmail.com
+                <b>Email</b>: {user?.email}
               </Typography>
 
               <div style={{ display: "flex", flexDirection: "row", gap: 15 }}>

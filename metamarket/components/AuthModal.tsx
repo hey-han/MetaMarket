@@ -1,18 +1,20 @@
-import { Button, Divider } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
-import ForgotPasswordModal from './ForgotPasswordModal';
-import LoginModal from './LoginModal';
-import RegisterModal from './RegisterModal';
+import { Button, Divider } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import Modal from "react-modal";
+import { AuthContext } from "../context/AuthContext";
+import ForgotPasswordModal from "./ForgotPasswordModal";
+import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
 
 export const WithLogin = (BaseComponent: React.FC) =>
   function Component(props: any) {
     const [authenticated, setAuthenticated] = useState(false);
 
+    const { user } = useContext(AuthContext);
+
     useEffect(() => {
-      // check session, if authenticated, setAuthenticated(true)
-      // the session checking logic, lets implement when backend is ready
-    }, []);
+      setAuthenticated(user !== undefined);
+    }, [user]);
 
     return (
       <div>
@@ -52,12 +54,12 @@ const AuthenticationModal = () => {
 
   const customStyles = {
     content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
     },
   };
 
@@ -66,22 +68,22 @@ const AuthenticationModal = () => {
       isOpen={true}
       onAfterOpen={() => {}}
       onRequestClose={() => {}}
-      contentLabel='Example Modal'
+      contentLabel="Example Modal"
       style={customStyles}
     >
       <RenderContent />
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-          marginTop: '35px',
-          marginBottom: '20px',
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          marginTop: "35px",
+          marginBottom: "20px",
         }}
       >
         {actionState === AuthenticationModalAction.login && (
           <Button
-            variant='text'
+            variant="text"
             onClick={() =>
               setActionState(AuthenticationModalAction.resetPassword)
             }
@@ -91,7 +93,7 @@ const AuthenticationModal = () => {
         )}
         {actionState !== AuthenticationModalAction.login && (
           <Button
-            variant='text'
+            variant="text"
             onClick={() => setActionState(AuthenticationModalAction.login)}
           >
             Back to login
@@ -99,17 +101,17 @@ const AuthenticationModal = () => {
         )}
         <div
           style={{
-            width: '400px',
-            height: '0.5px',
-            backgroundColor: '#dddddd',
-            margin: '10px',
+            width: "400px",
+            height: "0.5px",
+            backgroundColor: "#dddddd",
+            margin: "10px",
           }}
         ></div>
         {actionState === AuthenticationModalAction.login && (
           <div>
-            No account?{' '}
+            No account?{" "}
             <Button
-              variant='text'
+              variant="text"
               onClick={() => setActionState(AuthenticationModalAction.register)}
             >
               Sign up
