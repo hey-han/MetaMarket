@@ -14,7 +14,7 @@ import Image from "next/image";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { width } from "@mui/system";
 import FadeIn from "react-fade-in";
-import { WithLogin } from "../../components/AuthModal";
+import { WithLogin } from "../../components/AuthLogin";
 
 const Profile = () => {
   const [openEmail, setOpenEmail] = React.useState(false);

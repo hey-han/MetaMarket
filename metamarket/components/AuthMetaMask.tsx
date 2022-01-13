@@ -1,11 +1,27 @@
 import { Button, Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import ForgotPasswordModal from './ForgotPasswordModal';
-import LoginModal from './LoginModal';
-import RegisterModal from './RegisterModal';
+import { ethers } from "ethers";
+import Web3Modal from "web3modal";
 
-export const WithLogin = (BaseComponent: React.FC) =>
+
+const providerOptions = {
+  /* See Provider Options Section */
+};
+
+const web3Modal = new Web3Modal({
+  network: "mainnet", // optional
+  cacheProvider: true, // optional
+  providerOptions // required
+});
+
+const instance = await web3Modal.connect();
+
+const provider = new ethers.providers.Web3Provider(instance);
+const signer = provider.getSigner();
+
+
+export const WithMetaMask = (BaseComponent: React.FC) =>
   function Component(props: any) {
     const [authenticated, setAuthenticated] = useState(false);
 

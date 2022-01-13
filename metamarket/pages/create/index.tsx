@@ -4,17 +4,43 @@ import { ethers } from 'ethers'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
-import { WithLogin } from "../../components/AuthModal";
+import { WithLogin } from "../../components/AuthLogin";
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 import {nftmarketaddress, nftaddress} from '../../config'
 import Market from '../../artifacts/contracts/NFT_market.sol/MetaMarket.json'
 import NFT from '../../artifacts/contracts/NFT.sol/NFT.json'
 
+
+async function test() {
+  const web3Modal = new Web3Modal()
+  const connection = await web3Modal.connect()
+  const provider = new ethers.providers.Web3Provider(connection)    
+  const signer = provider.getSigner()
+}
+test()
+
+
+
 const Create: NextPage = () => {
   const [fileUrl, setFileUrl] = useState(null)
   const [formInput, updateFormInput] = useState({ price: '', name: '', creator:'', description: '' })
   const router = useRouter()
+
+  if (typeof window.ethereum !== 'undefined') {
+    console.log('MetaMask is installed!');
+  }
+  
+  async function test() {
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)    
+    const signer = provider.getSigner()
+
+    let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
+  }
+  test()
+  
 
 
   async function onChange(e) {
@@ -52,6 +78,8 @@ const Create: NextPage = () => {
 
 
   }
+
+
 
   async function createNFT(url) {
     const web3Modal = new Web3Modal()

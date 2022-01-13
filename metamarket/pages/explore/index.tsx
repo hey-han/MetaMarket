@@ -7,7 +7,6 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
-import { WithLogin } from "../../components/AuthModal";
 import ExploreCard from "../../components/ExploreCard";
 
 import {nftmarketaddress, nftaddress} from '../../config'
