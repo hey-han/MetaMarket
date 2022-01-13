@@ -15,12 +15,9 @@ const Create: NextPage = () => {
   const [formInput, updateFormInput] = useState({ price: '', name: '', creator:'', description: '' })
   const router = useRouter()
 
-
+  /* upload the image to IPFS */
   async function onChange(e) {
     const file = e.target.files[0]
-    const { name, description, price } = formInput
-
-    /* upload the image to IPFS */
     try {
       const added = await client.add(
         file,
@@ -30,13 +27,16 @@ const Create: NextPage = () => {
       )
       const url = `https://ipfs.infura.io/ipfs/${added.path}`
       setFileUrl(url)
-      createNFT(url)
     } catch (error) {
       console.log('Error uploading file: ', error)
     }
+  }
 
-    /* upload all information to IPFS */
+
+  async function createMarket() {
+    const { name, description, price } = formInput
     if (!name || !description || !price || !fileUrl) return
+    /* first, upload to IPFS */
     const data = JSON.stringify({
       name, description, image: fileUrl
     })
@@ -48,16 +48,15 @@ const Create: NextPage = () => {
     } catch (error) {
       console.log('Error uploading file: ', error)
     }  
-
-
   }
 
-  async function createNFT(url) {
+  async function createSale(url) {
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)    
     const signer = provider.getSigner()
 
+    /* next, create the item */
     let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
     let transaction = await contract.createToken(url)
     let tx = await transaction.wait()
@@ -66,7 +65,7 @@ const Create: NextPage = () => {
     let tokenId = value.toNumber()
     const price = ethers.utils.parseUnits(formInput.price, 'ether')
 
-    /* then list the NFT in dashboard inventory */
+    /* then list the item for sale on the marketplace */
     contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     let listingPrice = await contract.getListingPrice()
     listingPrice = listingPrice.toString()

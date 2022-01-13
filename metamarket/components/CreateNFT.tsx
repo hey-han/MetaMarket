@@ -5,9 +5,50 @@ import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
-import {nftmarketaddress, nftaddress} from '../../config'
-import Market from '../../artifacts/contracts/NFT_market.sol/MetaMarket.json'
-import NFT from '../../artifacts/contracts/NFT.sol/NFT.json'
+import {nftmarketaddress, nftaddress} from '../config'
+import Market from '../artifacts/contracts/NFT_market.sol/MetaMarket.json'
+import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
+
+async function createNFT(e) {
+  /* upload the image to IPFS */
+  const file = e.target.files[0]
+  try {
+    const added = await client.add(
+      file,
+      {
+        progress: (prog) => console.log(`received: ${prog}`)
+      }
+    )
+    const url = `https://ipfs.infura.io/ipfs/${added.path}`
+    setFileUrl(url)
+  } catch (error) {
+    console.log('Error uploading file: ', error)
+  }  
+
+  
+
+
+
+}
+
+
+
+async function uploadToIPFS(fromInput) {
+  const { name, description, price } = formInput
+  if (!name || !description || !price || !fileUrl) return
+  /* first, upload to IPFS */
+  const data = JSON.stringify({
+    name, description, image: fileUrl
+  })
+  try {
+    const added = await client.add(data)
+    const url = `https://ipfs.infura.io/ipfs/${added.path}`
+    /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
+    createSale(url)
+  } catch (error) {
+    console.log('Error uploading file: ', error)
+  }  
+}
 
 
 async function CreateNFT(url) {
