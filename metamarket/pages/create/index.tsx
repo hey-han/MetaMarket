@@ -4,6 +4,7 @@ import { ethers } from 'ethers'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
+import { WithLogin } from "../../components/AuthModal";
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 import {nftmarketaddress, nftaddress} from '../../config'
@@ -104,7 +105,7 @@ const Create: NextPage = () => {
             <img className="rounded mt-4" width="350" src={fileUrl} />
           )
         }
-        <button onClick={createMarket} className="font-bold mt-4 bg-sky-400 text-white rounded p-4 shadow-lg">
+        <button onClick={createNFT} className="font-bold mt-4 bg-sky-400 text-white rounded p-4 shadow-lg">
           Create New NFT
         </button>
       </div>
@@ -112,4 +113,4 @@ const Create: NextPage = () => {
   )
 };
 
-export default Create;
+export default WithLogin(Create);

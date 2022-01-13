@@ -5,6 +5,7 @@ import styles from './index.module.css';
 import * as Yup from 'yup';
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import { WithLogin } from "../../components/AuthModal";
 
 const Quiz: NextPage = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
@@ -78,4 +79,4 @@ const Quiz: NextPage = () => {
   );
 };
 
-export default Quiz;
+export default WithLogin(Quiz);
