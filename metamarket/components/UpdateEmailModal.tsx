@@ -16,7 +16,7 @@ const UpdateEmailModal = () => {
         flexDirection: 'column',
       }}
     >
-      <Image src="/MetaMarket.ico" alt="MetaMarket logo" width={250} height={250} />
+      <Image src="/MetaMarket.ico" alt="MetaMarket logo" width={250} height={270} />
       <Typography variant='h4' component='div' gutterBottom>
         Login
       </Typography>
