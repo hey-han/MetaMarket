@@ -6,6 +6,8 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "hardhat/console.sol";
+import "fungible_token.sol";
+
 
 contract MetaMarket is ReentrancyGuard {
   using Counters for Counters.Counter;
@@ -38,6 +40,7 @@ contract MetaMarket is ReentrancyGuard {
     uint256 indexed tokenId,
     address seller,
     address owner,
+    address creator,
     uint256 price,
     bool sold
   );
