@@ -17,40 +17,27 @@ const Create: NextPage = () => {
   const [formInput, updateFormInput] = useState({ price: '', name: '', creator:'', description: '' })
   const router = useRouter()
 
-
   async function onChange(e) {
     const file = e.target.files[0]
-    const { name, description, price } = formInput
+    const { name, creator } = formInput
+    // creator = 
+    if (!name || !file) return
+      const createData = JSON.stringify({name, creator, file})
 
     /* upload the image to IPFS */
     try {
-      const added = await client.add(
-        file,
+      const added = await client.add(createData,
         {
           progress: (prog) => console.log(`received: ${prog}`)
         }
       )
       const url = `https://ipfs.infura.io/ipfs/${added.path}`
-      setFileUrl(url)
       createNFT(url)
     } catch (error) {
       console.log('Error uploading file: ', error)
     }
-
-    /* upload all information to IPFS */
-    if (!name || !description || !price || !fileUrl) return
-    const data = JSON.stringify({
-      name, description, image: fileUrl
-    })
-    try {
-      const added = await client.add(data)
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`
-      /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
-      createSale(url)
-    } catch (error) {
-      console.log('Error uploading file: ', error)
-    }  
   }
+
 
   async function createNFT(url) {
     const web3Modal = new Web3Modal()
@@ -66,13 +53,13 @@ const Create: NextPage = () => {
     let tokenId = value.toNumber()
     const price = ethers.utils.parseUnits(formInput.price, 'ether')
 
-    /* then list the NFT in dashboard inventory */
-    contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
-    let listingPrice = await contract.getListingPrice()
-    listingPrice = listingPrice.toString()
-    transaction = await contract.createMarketItem(nftaddress, tokenId, price, { value: listingPrice })
-    await transaction.wait()
-    router.push('/')
+    // /* then list the NFT in dashboard inventory */
+    // contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
+    // let listingPrice = await contract.getListingPrice()
+    // listingPrice = listingPrice.toString()
+    // transaction = await contract.createMarketItem(nftaddress, tokenId, price, { value: listingPrice })
+    // await transaction.wait()
+    // router.push('/')
   }
 
   
@@ -85,14 +72,9 @@ const Create: NextPage = () => {
           onChange={e => updateFormInput({ ...formInput, name: e.target.value })}
         />
         <textarea
-          placeholder="NFT Description"
+          placeholder="NFT Creator"
           className="mt-2 border rounded p-4"
           onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
-        />
-        <input
-          placeholder="Price in MetaMark"
-          className="mt-2 border rounded p-4"
-          onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
         />
         <input
           type="file"
@@ -113,5 +95,5 @@ const Create: NextPage = () => {
   )
 };
 
-// export default WithLogin(Create);
-export default AuthMetaMask(Create);
+export default WithLogin(AuthMetaMask(Create));
+// export default AuthMetaMask(Create);
