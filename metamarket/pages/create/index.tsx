@@ -1,13 +1,11 @@
 import { NextPage } from "next";
 import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
-import Web3 from "web3";
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
-import detectEthereumProvider from '@metamask/detect-provider';
 import { WithLogin } from "../../components/AuthLogin";
-import AuthMetaMask from "../../components/AuthMetaMask";
+import {AuthMetaMask} from "../../components/AuthMetaMask";
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 import {nftmarketaddress, nftaddress} from '../../config'
@@ -18,18 +16,6 @@ const Create: NextPage = () => {
   const [fileUrl, setFileUrl] = useState(null)
   const [formInput, updateFormInput] = useState({ price: '', name: '', creator:'', description: '' })
   const router = useRouter()
-
-  // useEffect(() => {
-  //   if (window.ethereum) {
-  //     console.log("window.ethereum detected"); 
-  //     return (<div>The MetaMask Ethereum provider is detected.</div>)
-  //   } else {
-  //     console.log("window.ethereum not detected"); 
-  //     return (<div>Please install MetaMask to your browser!</div>)
-  //   }
-  // });
-  AuthMetaMask()
-
 
 
   async function onChange(e) {
@@ -127,4 +113,5 @@ const Create: NextPage = () => {
   )
 };
 
-export default WithLogin(Create);
+// export default WithLogin(Create);
+export default AuthMetaMask(Create);
