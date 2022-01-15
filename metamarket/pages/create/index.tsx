@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import Web3 from "web3";
 import { create as ipfsHttpClient } from 'ipfs-http-client'
@@ -7,52 +7,30 @@ import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
 import detectEthereumProvider from '@metamask/detect-provider';
 import { WithLogin } from "../../components/AuthLogin";
+import AuthMetaMask from "../../components/AuthMetaMask";
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 import {nftmarketaddress, nftaddress} from '../../config'
 import Market from '../../artifacts/contracts/NFT_market.sol/MetaMarket.json'
 import NFT from '../../artifacts/contracts/NFT.sol/NFT.json'
-import { getEnabledCategories } from "trace_events";
 
 const Create: NextPage = () => {
   const [fileUrl, setFileUrl] = useState(null)
   const [formInput, updateFormInput] = useState({ price: '', name: '', creator:'', description: '' })
   const router = useRouter()
 
-  // if (typeof window !== 'undefined') {
-  //   console.log('window.innerHeight', window.innerHeight);
-  //   return (<div>window detected</div>)
-  // } else {
-  //   return (<div>window not detected</div>)
-  // }
+  // useEffect(() => {
+  //   if (window.ethereum) {
+  //     console.log("window.ethereum detected"); 
+  //     return (<div>The MetaMask Ethereum provider is detected.</div>)
+  //   } else {
+  //     console.log("window.ethereum not detected"); 
+  //     return (<div>Please install MetaMask to your browser!</div>)
+  //   }
+  // });
+  AuthMetaMask()
 
-  // if (window.ethereum) {
-  //   return (<div>the MetaMask Ethereum provider detected</div>)
-  // } else {
-  //   return (<div>the MetaMask Ethereum provider not detected</div>)
-  // }
 
-  async function test() {
-    const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)    
-    // const signer = provider.getSigner(0xE072ca1a97C166f1bB19C0293D0B8946C4F5fC03)
-    const signer = provider.getSigner()
-    // let web3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546')
-    // web3.eth.getAccounts(console.log);
-    console.log("Account:", await signer.getAddress());
-    //console.log(await signer.getAddress()); 
-
-    // let web3
-    // if (window.ethereum) {
-    //   web3 = new Web3(window.ethereum)
-    //   await ethereum.enalbe()
-    //   return (<div>the MetaMask Ethereum provider detected</div>)
-    // } else {
-    //   return (<div>the MetaMask Ethereum provider not detected</div>)
-    // }
-  }
-  test()
 
   async function onChange(e) {
     const file = e.target.files[0]
