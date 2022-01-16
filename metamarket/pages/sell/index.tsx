@@ -4,6 +4,7 @@ import { ethers } from 'ethers'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
+import {AuthMetaMask} from "../../components/AuthMetaMask";
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 import {nftmarketaddress, nftaddress} from '../../config'
@@ -80,4 +81,4 @@ const Sell: NextPage = (name, creator, url) => {
   )
 };
 
-export default Sell;
+export default AuthMetaMask(Sell);

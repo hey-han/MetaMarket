@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { WithLogin } from "../../components/AuthLogin";
+import {AuthMetaMask} from "../../components/AuthMetaMask";
 
 const Quiz: NextPage = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
@@ -79,4 +80,4 @@ const Quiz: NextPage = () => {
   );
 };
 
-export default WithLogin(Quiz);
+export default WithLogin(AuthMetaMask(Quiz));
