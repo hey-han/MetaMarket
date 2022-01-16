@@ -24,6 +24,7 @@ const Profile = () => {
   const [openPassword, setOpenPassword] = React.useState(false);
   const handleOpenPassword = () => setOpenPassword(true);
   const handleClosePassword = () => setOpenPassword(false);
+
   return (
     <FadeIn>
       <div
@@ -111,7 +112,7 @@ const Profile = () => {
                 <b>Username</b>: JohnTan12345
               </Typography>
               <Typography>
-                <b>Id</b>: ABC123456
+                <b>MetaMask Account</b>: ABC123456
               </Typography>
               <Typography>
                 <b>Email</b>: sampleEmail@gmail.com
@@ -180,6 +181,7 @@ const Profile = () => {
                   NFT 1
                 </Typography>
               </Card>
+
               <Card
                 style={{
                   marginTop: 20,
@@ -208,6 +210,7 @@ const Profile = () => {
                   NFT 2
                 </Typography>
               </Card>
+              
               <Card
                 style={{
                   marginTop: 20,

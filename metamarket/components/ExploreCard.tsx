@@ -6,7 +6,9 @@ import Avatar from "@mui/material/Avatar";
 import { red } from "@mui/material/colors";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import Button from "@material-ui/core/Button";
 import Link from "next/link";
+import buyNFT from "../pages/explore";
 
 interface ExploreCardProps {
   id: string;
@@ -66,6 +68,10 @@ export default function ExploreCard(props: ExploreCardProps) {
             >
               buy
             </Typography>
+
+            <Button  onClick={() => buyNFT(props)}>
+                Buy
+            </Button>
 
           </CardContent>
         </CardActionArea>

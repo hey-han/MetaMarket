@@ -3,6 +3,7 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import Link from "next/link";
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -111,7 +112,9 @@ const Explore: NextPage = () => {
             {
               nfts.map((nft, i) => (
                 <div key={i} className="border shadow rounded-xl overflow-hidden">
-                  <img src={nft.image} />
+                  <a href={"/explore/card_content"}>
+                    <img src={nft.image} />
+                  </a>
                   <div className="p-4">
                     <p style={{ height: '64px' }} className="text-2xl font-semibold">{nft.name}</p>
                     <div style={{ height: '70px', overflow: 'hidden' }}>
@@ -120,7 +123,7 @@ const Explore: NextPage = () => {
                   </div>
                   <div className="p-4 bg-black">
                     <p className="text-2xl mb-4 font-bold text-white">{nft.price} ETH</p>
-                    <button className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
+                    <button className="w-full bg-sky-400 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
                   </div>
                 </div>
               ))
