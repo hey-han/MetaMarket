@@ -55,10 +55,10 @@ const Explore: NextPage = () => {
     }))
 
     setNfts(items)
-    setLoadingState('loaded') 
+    setLoadingState('loaded')
+    console.log("page: " + loadingState)
   }
 
-  loadNFTs()
 
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="px-20 py-10 text-3xl">No items in marketplace</h1>)
 
