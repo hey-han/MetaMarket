@@ -18,7 +18,8 @@ import {nftmarketaddress, nftaddress} from '../config'
 import Market from '../artifacts/contracts/NFT_market.sol/MetaMarket.json'
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 
-export default async function buyNft(props: NFTProps) {
+export default async function BuyNFT(props: NFTProps) {
+    console.log("here")
     /* needs the user to sign the transaction, so will use Web3Provider and sign it */
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
@@ -32,4 +33,6 @@ export default async function buyNft(props: NFTProps) {
       value: price
     })
     await transaction.wait()
+    window.location.href = "/dashboard";
   }
+  
