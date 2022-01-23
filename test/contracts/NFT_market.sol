@@ -213,6 +213,7 @@ contract MetaMarket is ReentrancyGuard {
         }
         highestBid = newBid;
     }
+    endBlock += 40;
     return true;
 }
   // OLD
