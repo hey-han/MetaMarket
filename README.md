@@ -1,4 +1,4 @@
-# NFT_Gallery
+# MetaMarket
 
 Project Objectives:
 To incentivize members to participate in club activities, such as workshops, newsletters, and hackathons. This will be achieved through the exclusive distribution of club ‘BNS’ tokens.
